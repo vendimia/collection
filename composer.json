@@ -1,0 +1,23 @@
+{
+    "name": "vendimia/collection",
+    "description": "Object-oriented array reimplementation",
+    "license": "GPL-3.0-or-later",
+    "keywords": ["collection", "array"],
+    "require": {
+        "php": ">=8.1",
+        "vendimia/interfaces": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vendimia\\Collection\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Oliver Etchebarne",
+            "email": "yo@drmad.org",
+            "homepage": "https://drmad.org",
+            "role": "developer"
+        }
+    ]
+}
