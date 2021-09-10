@@ -13,7 +13,7 @@ class Collection implements Arrayable, ArrayAccess, Countable, Iterator
 {
     protected $storage = [];
 
-    public function __construct(array|Arrayable $array) {
+    public function __construct(array|Arrayable $array = []) {
         if ($array instanceof Arrayable) {
             $this->storage = $array->asArray();
         } else {
