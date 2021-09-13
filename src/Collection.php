@@ -141,6 +141,31 @@ class Collection implements Arrayable, ArrayAccess, Countable, Iterator
     }
 
     /**
+     * Returns the sum of all the elements in the collection
+     */
+    public function sum(): int|float
+    {
+        return array_sum($this->storage);
+    }
+
+    /**
+     * Extract some  elements from the collection by their keys into a new collection
+     */
+    public function extract(...$keys): self
+    {
+        if (count($keys) == 0) {
+            return $this->asArray();
+        }
+
+        $return = new self;
+        foreach ($keys as $key) {
+            $return->$key = $this->storage[$key];
+        }
+
+        return $return;
+    }
+
+    /**
      * Arrayable implementation
      */
     public function asArray(): array
