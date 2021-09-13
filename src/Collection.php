@@ -148,6 +148,19 @@ class Collection implements Arrayable, ArrayAccess, Countable, Iterator
         return $this->storage;
     }
 
+    public function asArrayRecursive(): array
+    {
+        $result = [];
+        foreach ($this->storage as $key => $value) {
+            if ($value instanceof self) {
+                $value = $value->asArrayRecursive();
+            }
+            $result[$key] = $value;
+        }
+
+        return $result;
+    }
+
     /**
      * Returns the array when called via var_dump() and friends.
      */
