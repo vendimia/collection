@@ -235,4 +235,20 @@ class Collection implements Arrayable, ArrayAccess, Countable, Iterator
     {
         return current($this->storage) !== false;
     }
+
+    /**
+     * Returns an element by index as if it was a object property
+     */
+    public function &__get(string $name): mixed
+    {
+        return $this->get($name);
+    }
+
+    /**
+     * Sets an element value by index as if it was a object property
+     */
+    public function __set(string $name, $value)
+    {
+        return $this->set($value, $name);
+    }
 }

@@ -153,6 +153,49 @@ final class CollectionTest extends TestCase
         );
     }
 
+    public function testAccessElementAsProperty()
+    {
+        $collection = new Collection(['name' => 'oliver']);
+
+        $this->assertEquals(
+            'oliver',
+            $collection->name
+        );
+    }
+
+    public function testAccessPropertyAsKey()
+    {
+        $collection = new Collection;
+        $collection->name = 'oliver';
+
+        $this->assertEquals(
+            'oliver',
+            $collection['name']
+        );
+    }
+
+    public function testElementAsReference()
+    {
+        $collection = new Collection(['value' => 10]);
+        $collection['value']++;
+
+        $this->assertEquals(
+            11,
+            $collection->value
+        );
+    }
+
+    public function testPropertyAsReference()
+    {
+        $collection = new Collection(['value' => 10]);
+        $collection->value++;
+
+        $this->assertEquals(
+            11,
+            $collection['value']
+        );
+    }
+
 
     public function testMap()
     {
@@ -161,6 +204,17 @@ final class CollectionTest extends TestCase
         $this->assertEquals(
             [4, 16, 36, 64],
             $numbers->map(fn($x) => $x * $x)->asArray(),
+        );
+    }
+
+    /**
+     * @depends testInitializeCollectionWithDict
+     */
+    public function testExtract(Collection $collection)
+    {
+        $this->assertEquals(
+            ['name' => 'Oliver', 'age' => '40'],
+            $collection->extract('name', 'age')->asArray()
         );
     }
 }
