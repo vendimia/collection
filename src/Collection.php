@@ -59,9 +59,13 @@ class Collection implements Arrayable, ArrayAccess, Countable, Iterator
     /**
      * Returns an element of this collection.
      */
-    public function &get($index): mixed
+    public function &get($index, $default = null): mixed
     {
-        return $this->storage[$index];
+        if (key_exists($index, $this->storage)) {
+            return $this->storage[$index];
+        }
+
+        return $default;
     }
 
     /**
