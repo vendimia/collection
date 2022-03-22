@@ -13,12 +13,29 @@ class Collection implements Arrayable, ArrayAccess, Countable, Iterator
 {
     protected $storage = [];
 
-    public function __construct(array|Arrayable $array = []) {
+    public function __construct(...$args)
+    {
+        $this->storage = $args;
+    }
+
+    /**
+     * Syntax sugar for the constructor
+     */
+    public function new(...$args)
+    {
+        return new self(...$args);
+    }
+
+    /**
+     * Returns a collectin from an array
+     */
+    public static function fromArray(array|ArrayAccess|Arrayable $array)
+    {
         if ($array instanceof Arrayable) {
-            $this->storage = $array->asArray();
-        } else {
-            $this->storage = $array;
+            $array = $array->asArray();
         }
+
+        return new self(...$array);
     }
 
     /**
@@ -163,6 +180,14 @@ class Collection implements Arrayable, ArrayAccess, Countable, Iterator
         }
 
         return $return;
+    }
+
+    /**
+     * Returns if this collection is empty
+     */
+    public function isEmpty(): bool
+    {
+        return empty($this->storage);
     }
 
     /**
