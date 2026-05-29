@@ -39,6 +39,20 @@ class Collection implements Arrayable, ArrayAccess, Countable, Iterator
     }
 
     /**
+     * Updates the internal storage from an array or array-like object
+     */
+    public function setStorage(array|ArrayAccess|Arrayable &$array): self
+    {
+        if ($array instanceof Arrayable) {
+            $array = $array->asArray();
+        }
+
+        $this->storage = $array;
+
+        return $this;
+    }
+
+    /**
      * Returns true when this collection is a list.
      *
      * A list has sequential positive integer indexes starting with 0
